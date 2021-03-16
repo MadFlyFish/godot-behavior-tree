@@ -11,7 +11,6 @@
 [ext_resource path="res://addons/behavior_tree/src/btnodes/leaves/bt_wait.gd" type="Script" id=9]
 [ext_resource path="res://addons/behavior_tree/src/btnodes/decorators/bt_repeat.gd" type="Script" id=10]
 
-
 [node name="BehaviorTree" type="Node"]
 script = ExtResource( 2 )
 is_active = true
