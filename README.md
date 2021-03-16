@@ -8,7 +8,7 @@ INSTALLATION
 - Enable the plugin from project settings, THEN RESTART Godot, otherwise it will not recognize the new classes (that's a bug of the engine).
 - Optionally, you can also drag the bt_example folder into the main directory of your project.
 - To see the example working, run the agent.tscn scene. The ex_behavior_tree.tscn scene is an example of how the tree is built.
-
+- Some script templates are provided. You should use them ;)
 ![alt text](https://raw.githubusercontent.com/GabrieleTorini/godot-behavior-tree/main/bt_images/Screenshot%202021-03-13%20085615.png)![alt text](https://raw.githubusercontent.com/GabrieleTorini/godot-behavior-tree/main/bt_images/Screenshot%202021-03-13%20085633.png)
 
 INSTRUCTIONS:
