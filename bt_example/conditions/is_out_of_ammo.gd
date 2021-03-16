@@ -4,8 +4,8 @@ func _tick(agent: Node, blackboard: Blackboard) -> bool:
 	assert("ammo" in agent)
 	
 	if agent.ammo <= 0:
-		print("\t yes")
+		print("\tsuccess")
 		return ._tick(agent, blackboard)
 	else:
-		print("\t no")
+		print("\tfailed")
 		return fail()

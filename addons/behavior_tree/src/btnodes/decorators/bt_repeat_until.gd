@@ -18,4 +18,4 @@ func _tick(agent: Node, blackboard: Blackboard) -> bool:
 		if result is GDScriptFunctionState:
 			result = yield(result, "completed")
 	
-	return set_state(bt_child)
+	return set_state(bt_child.state)

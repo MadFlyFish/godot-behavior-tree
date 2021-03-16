@@ -8,12 +8,16 @@ extends BTNode
 # (BTSequence, BTSelector or BTParallel) to define the flow between multiple leaf nodes.
 
 
+func _ready():
+	assert(get_child_count() == 0)
+
+
 # BEGINNING OF VIRTUAL FUNCTIONS
 # Extend this script and override the following (check template for example)
 
 # Called after tick()
 func _on_tick(result: bool):
-	._on_tick(result)
+	pass
 
 
 func _tick(agent: Node, blackboard: Blackboard) -> bool:

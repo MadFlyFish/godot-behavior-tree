@@ -1,24 +1,22 @@
 extends BTLeaf
 
-export(String) var agent_method
-export(String) var blackboard_key_argument
-
 
 
 # Called after tick()
 func _on_tick(result: bool):
-	._on_tick(result)
+	print("\t" + ("successful" if result else "failed"))
+
 
 
 func _tick(agent: Node, blackboard: Blackboard) -> bool:
-	assert(agent.has_method(agent_method))
+	assert(agent.has_method("my_method"))
 	
-	if not blackboard.has_data(blackboard_key_argument):
+	if not blackboard.has_data("my_key"):
 		return fail()
 	
 	var result = true
 	
-	result = agent.call(agent_method, blackboard.get_data(blackboard_key_argument))
+	result = agent.call("my_method", blackboard.get_data("my_key"))
 	
 	# If action is executing, wait for completion and remain in running state
 	if result is GDScriptFunctionState:

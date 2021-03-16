@@ -52,7 +52,6 @@ var state: BTNodeState = BTNodeState.new()
 func _on_tick(result: bool):
 	pass
 
-
 # This is the most important function. Override this and put your behavior here.
 func _tick(agent: Node, blackboard: Blackboard) -> bool:
 	return succeed()
@@ -104,8 +103,8 @@ func get_state() -> String:
 		return "running"
 
 
-func set_state(rhs: BTNode) -> bool:
-	if rhs.succeeded():
+func set_state(rhs: BTNodeState) -> bool:
+	if rhs.success:
 		return succeed()
 	else:
 		return fail()

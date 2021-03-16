@@ -8,8 +8,8 @@ func _tick(agent: Node, blackboard: Blackboard) -> bool:
 		return fail()
 	
 	if agent.get("is_alive") and blackboard.get_data("is_target_aquired"):
-		print("\t yes")
+		print("\tsuccess")
 		return ._tick(agent, blackboard)
 	else:
-		print("\t no")
+		print("\tfailed")
 		return fail()

@@ -59,12 +59,12 @@ func _tick(agent: Node, blackboard: Blackboard) -> bool:
 	if not locker:
 		check_lock(bt_child)
 	
-	return set_state(bt_child)
+	return set_state(bt_child.state)
 
 
 func _on_locker_tick(_result):
 	check_lock(locker)
-	set_state(locker)
+	set_state(locker.state)
 
 
 func _ready():
