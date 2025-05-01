@@ -1,0 +1,392 @@
+[gd_scene load_steps=30 format=3 uid="uid://b1mm2ce8hucb2"]
+
+[ext_resource type="Script" uid="uid://bnq6bf8gylfcs" path="res://example/Level.gd" id="1_ng2ag"]
+[ext_resource type="Script" uid="uid://bii2s1rv2u3ge" path="res://example/Player.gd" id="1_y1jsw"]
+[ext_resource type="Texture2D" uid="uid://b1eevd34cdea7" path="res://example/assets/playerGrey_up1.png" id="2_1kog2"]
+[ext_resource type="Texture2D" uid="uid://cpn8gagteeqv" path="res://example/assets/enemyWalking_1.png" id="3_2xot7"]
+[ext_resource type="Script" uid="uid://csidvng5861dn" path="res://example/Enemy.gd" id="3_waekl"]
+[ext_resource type="Script" uid="uid://dd13l62ft7rs1" path="res://addons/godot_bt/BehaviorTree.gd" id="5_mvtj7"]
+[ext_resource type="Script" uid="uid://b88fwi00n578k" path="res://addons/godot_bt/composite/BTSelector.gd" id="6_vvvv7"]
+[ext_resource type="Script" uid="uid://b5ybwranij108" path="res://addons/godot_bt/keys/BBTargetKey.gd" id="8_w47ov"]
+[ext_resource type="Script" uid="uid://h6hmhda2f7yt" path="res://example/tasks/BTFindPathTo.gd" id="10_rj4us"]
+[ext_resource type="Script" uid="uid://c7fewx5w7tggu" path="res://addons/godot_bt/BTCondition.gd" id="11_bk85x"]
+[ext_resource type="Script" uid="uid://cnv83q0m3ynrc" path="res://addons/godot_bt/BTService.gd" id="11_rj4us"]
+[ext_resource type="Script" uid="uid://gvjmy88w2fpi" path="res://example/services/BTPlayerDetector.gd" id="12_uo51d"]
+[ext_resource type="Script" uid="uid://bkaoy7ic64amm" path="res://addons/godot_bt/condition/BTCheckNonZeroBBEntry.gd" id="12_vo83w"]
+[ext_resource type="Script" uid="uid://dfxda4exmr12v" path="res://addons/godot_bt/composite/BTSequence.gd" id="14_iu18o"]
+[ext_resource type="Script" uid="uid://b5jvn2xhesc3h" path="res://example/services/BTPatrolPathFollower.gd" id="14_rj4us"]
+[ext_resource type="Script" uid="uid://dqha82ccbwnjj" path="res://example/tasks/BTLookAt.gd" id="16_sxsli"]
+[ext_resource type="Script" uid="uid://c007b8lney264" path="res://example/services/BTRandomDirectionPicker.gd" id="17_cprs5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj4us"]
+size = Vector2(104, 58)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_rj4us"]
+vertices = PackedVector2Array(370, -70, 1154, 84, 950, 84, -278, 74, 166, -70, 434, 818, 1342.45, 837.813, -654, 830.188, 230, 818, 434, 378, 950, 242, 1154, 242, 1082, 516, 878, 516, -278, -366, 238, -502, 442, -502, 370, -228, 166, -228, 1357.53, -829.422, 1082, 674, 878, 674, 442, -660, -654, -806.563, 238, -660, -278, -84, 434, 660, 434, 220, -278, -524, 230, 220, -482, -524, -482, -366, -482, -84, 230, 378, 230, 660, -482, 74)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17, 18), PackedInt32Array(11, 19, 6, 20), PackedInt32Array(19, 11, 1), PackedInt32Array(20, 6, 5, 21), PackedInt32Array(11, 20, 12), PackedInt32Array(19, 1, 16, 22), PackedInt32Array(16, 1, 0, 17), PackedInt32Array(23, 19, 22, 24), PackedInt32Array(4, 3, 25, 18), PackedInt32Array(21, 5, 26, 13), PackedInt32Array(10, 9, 27, 2), PackedInt32Array(15, 14, 28, 24), PackedInt32Array(3, 2, 27, 29), PackedInt32Array(23, 24, 28, 30), PackedInt32Array(7, 23, 30, 31), PackedInt32Array(14, 18, 25, 32, 31), PackedInt32Array(33, 9, 13, 26, 34), PackedInt32Array(7, 31, 32), PackedInt32Array(7, 32, 35), PackedInt32Array(34, 8, 7, 35, 3), PackedInt32Array(33, 34, 3), PackedInt32Array(33, 3, 29)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-704, -856, -704, 880, 1392, 888, 1408, -880)])
+parsed_geometry_type = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"nav"
+agent_radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y1jsw"]
+radius = 32.573
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1kog2"]
+radius = 32.573
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mdcl8"]
+radius = 303.21
+
+[sub_resource type="Resource" id="Resource_sxsli"]
+script = ExtResource("12_uo51d")
+_player_visible_key = &"is_player_visible"
+_player_key = &"player"
+_detection_memory = 2.0
+_detection_radius = 500.0
+_detection_area_path = "DetectionArea2D"
+_player_group = "player"
+_collision_mask = 1
+_exclude_keys = Array[StringName]([])
+_exclude_groups = Array[StringName]([&"enemies"])
+_is_enabled = true
+_frequency = 0.3
+_variation = 0.1
+_skip_first = false
+metadata/_custom_type_script = "uid://cp445t6nhevx0"
+
+[sub_resource type="Resource" id="Resource_05xv4"]
+script = ExtResource("12_vo83w")
+_key_query = 0
+_key = &"is_player_visible"
+_abort_trigger = 3
+_abort_scope = 3
+_is_enabled = true
+_flip = false
+metadata/_custom_type_script = "uid://bkaoy7ic64amm"
+
+[sub_resource type="Resource" id="Resource_7s355"]
+script = ExtResource("8_w47ov")
+targeting_mode = 2
+target_key = &"player"
+metadata/_custom_type_script = "uid://b5ybwranij108"
+
+[sub_resource type="Resource" id="Resource_rj4us"]
+script = ExtResource("8_w47ov")
+targeting_mode = 1
+target_key = &"patrol_point"
+metadata/_custom_type_script = "uid://b5ybwranij108"
+
+[sub_resource type="Resource" id="Resource_uo51d"]
+script = ExtResource("14_rj4us")
+_patrol_points_key = &"patrol_points"
+_current_index_key = &"patrol_index"
+_target_point_key = &"patrol_point"
+_random_selection = true
+_is_enabled = true
+_frequency = 0.0
+_variation = 0.1
+_skip_first = false
+metadata/_custom_type_script = "uid://cb0315fvjatco"
+
+[sub_resource type="Resource" id="Resource_cprs5"]
+script = ExtResource("8_w47ov")
+targeting_mode = 0
+target_key = &"random_look_direction"
+metadata/_custom_type_script = "uid://b5ybwranij108"
+
+[sub_resource type="Resource" id="Resource_1u1aq"]
+script = ExtResource("17_cprs5")
+_direction_key = &"random_look_direction"
+_min_angle_change = 0.523599
+_max_angle_change = 3.14159
+_use_absolute_angles = false
+_sector_angles = Array[float]([])
+_sector_amplitude = 0.523599
+_is_enabled = true
+_frequency = 0.0
+_variation = 0.1
+_skip_first = false
+metadata/_custom_type_script = "uid://ca5ek1shs247n"
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_ng2ag")
+
+[node name="Polygon2D" type="Polygon2D" parent="." groups=["nav"]]
+color = Color(0.832023, 0.891531, 0.755544, 1)
+antialiased = true
+polygon = PackedVector2Array(-704, -864, -704, 888, 1400, 896, 1408, -864)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D"]
+position = Vector2(312, 280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D/StaticBody2D"]
+position = Vector2(20, 19)
+shape = SubResource("RectangleShape2D_rj4us")
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D/StaticBody2D"]
+color = Color(0.875672, 0.582552, 0.738358, 1)
+antialiased = true
+polygon = PackedVector2Array(-32, -8, -32, 48, 72, 48, 72, -8)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Polygon2D"]
+position = Vector2(312, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D/StaticBody2D2"]
+position = Vector2(20, 19)
+shape = SubResource("RectangleShape2D_rj4us")
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D/StaticBody2D2"]
+color = Color(0.875672, 0.582552, 0.738358, 1)
+antialiased = true
+polygon = PackedVector2Array(-32, -8, -32, 48, 72, 48, 72, -8)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Polygon2D"]
+position = Vector2(960, 576)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D/StaticBody2D3"]
+position = Vector2(20, 19)
+shape = SubResource("RectangleShape2D_rj4us")
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D/StaticBody2D3"]
+color = Color(0.875672, 0.582552, 0.738358, 1)
+antialiased = true
+polygon = PackedVector2Array(-32, -8, -32, 48, 72, 48, 72, -8)
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Polygon2D"]
+position = Vector2(1032, 144)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D/StaticBody2D4"]
+position = Vector2(20, 19)
+shape = SubResource("RectangleShape2D_rj4us")
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D/StaticBody2D4"]
+color = Color(0.875672, 0.582552, 0.738358, 1)
+antialiased = true
+polygon = PackedVector2Array(-32, -8, -32, 48, 72, 48, 72, -8)
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Polygon2D"]
+position = Vector2(-400, -464)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D/StaticBody2D5"]
+position = Vector2(20, 19)
+shape = SubResource("RectangleShape2D_rj4us")
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D/StaticBody2D5"]
+color = Color(0.875672, 0.582552, 0.738358, 1)
+antialiased = true
+polygon = PackedVector2Array(-32, -8, -32, 48, 72, 48, 72, -8)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Polygon2D"]
+position = Vector2(-400, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D/StaticBody2D6"]
+position = Vector2(20, 19)
+shape = SubResource("RectangleShape2D_rj4us")
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D/StaticBody2D6"]
+color = Color(0.875672, 0.582552, 0.738358, 1)
+antialiased = true
+polygon = PackedVector2Array(-32, -8, -32, 48, 72, 48, 72, -8)
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="Polygon2D"]
+position = Vector2(248, -168)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D/StaticBody2D7"]
+position = Vector2(20, 19)
+shape = SubResource("RectangleShape2D_rj4us")
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D/StaticBody2D7"]
+color = Color(0.875672, 0.582552, 0.738358, 1)
+antialiased = true
+polygon = PackedVector2Array(-32, -8, -32, 48, 72, 48, 72, -8)
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="Polygon2D"]
+position = Vector2(320, -600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D/StaticBody2D8"]
+position = Vector2(20, 19)
+shape = SubResource("RectangleShape2D_rj4us")
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D/StaticBody2D8"]
+color = Color(0.875672, 0.582552, 0.738358, 1)
+antialiased = true
+polygon = PackedVector2Array(-32, -8, -32, 48, 72, 48, 72, -8)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_rj4us")
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(592, -208)
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_y1jsw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+visible = false
+shape = SubResource("CircleShape2D_y1jsw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+rotation = 1.5708
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_1kog2")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+
+[node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("bt", "patrol_path") groups=["enemies"]]
+position = Vector2(743, 359)
+motion_mode = 1
+script = ExtResource("3_waekl")
+bt = NodePath("../BehaviorTree")
+patrol_path = NodePath("../PatrolPath")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+visible = false
+shape = SubResource("CircleShape2D_1kog2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_2xot7")
+
+[node name="DetectionArea2D" type="Area2D" parent="Enemy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/DetectionArea2D"]
+visible = false
+shape = SubResource("CircleShape2D_mdcl8")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy"]
+target_desired_distance = 50.0
+
+[node name="Enemy2" type="CharacterBody2D" parent="." node_paths=PackedStringArray("bt", "patrol_path") groups=["enemies"]]
+position = Vector2(-544, -288)
+motion_mode = 1
+script = ExtResource("3_waekl")
+bt = NodePath("../BehaviorTree")
+patrol_path = NodePath("../PatrolPath")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
+visible = false
+shape = SubResource("CircleShape2D_1kog2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy2"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_2xot7")
+
+[node name="DetectionArea2D" type="Area2D" parent="Enemy2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2/DetectionArea2D"]
+visible = false
+shape = SubResource("CircleShape2D_mdcl8")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy2"]
+target_desired_distance = 50.0
+
+[node name="Enemy3" type="CharacterBody2D" parent="." node_paths=PackedStringArray("bt", "patrol_path") groups=["enemies"]]
+position = Vector2(1200, -400)
+motion_mode = 1
+script = ExtResource("3_waekl")
+bt = NodePath("../BehaviorTree")
+patrol_path = NodePath("../PatrolPath")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3"]
+visible = false
+shape = SubResource("CircleShape2D_1kog2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy3"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_2xot7")
+
+[node name="DetectionArea2D" type="Area2D" parent="Enemy3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3/DetectionArea2D"]
+visible = false
+shape = SubResource("CircleShape2D_mdcl8")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy3"]
+target_desired_distance = 50.0
+
+[node name="Enemy4" type="CharacterBody2D" parent="." node_paths=PackedStringArray("bt", "patrol_path") groups=["enemies"]]
+position = Vector2(-440, 672)
+motion_mode = 1
+script = ExtResource("3_waekl")
+bt = NodePath("../BehaviorTree")
+patrol_path = NodePath("../PatrolPath")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy4"]
+visible = false
+shape = SubResource("CircleShape2D_1kog2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy4"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_2xot7")
+
+[node name="DetectionArea2D" type="Area2D" parent="Enemy4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy4/DetectionArea2D"]
+visible = false
+shape = SubResource("CircleShape2D_mdcl8")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy4"]
+target_desired_distance = 50.0
+
+[node name="PatrolPath" type="Node2D" parent="."]
+
+[node name="Node2D" type="Node2D" parent="PatrolPath"]
+position = Vector2(163, 472)
+
+[node name="Node2D2" type="Node2D" parent="PatrolPath"]
+position = Vector2(333, 156)
+
+[node name="Node2D3" type="Node2D" parent="PatrolPath"]
+position = Vector2(474, 557)
+
+[node name="Node2D4" type="Node2D" parent="PatrolPath"]
+position = Vector2(1007, 95)
+
+[node name="Node2D5" type="Node2D" parent="PatrolPath"]
+position = Vector2(1042, 560)
+
+[node name="BehaviorTree" type="Node" parent="."]
+script = ExtResource("5_mvtj7")
+metadata/_custom_type_script = "uid://dd13l62ft7rs1"
+
+[node name="RootSelector" type="Node" parent="BehaviorTree"]
+editor_description = "The player detector is a the root (top priority) so that the blackboard will be updated at every tick and trigger aborts for lower priority branches if necessary (in this case, the chasing branch). Note that we run this service at every tick, with a frequency of 0.3 seconds, which is a rough estimate for a reasonable reaction time. So instead of checking every frame, we check every 0.3 seconds which is fine even for the most expensive checks."
+script = ExtResource("6_vvvv7")
+_services = Array[ExtResource("11_rj4us")]([SubResource("Resource_sxsli")])
+metadata/_custom_type_script = "uid://b88fwi00n578k"
+
+[node name="BTSequence" type="Node" parent="BehaviorTree/RootSelector"]
+editor_description = "This branch has a reactive condition: when the specified blackboard key changes AND the condition evaluates to true, we abort any lower priority branch and run this branch."
+script = ExtResource("14_iu18o")
+_conditions = Array[ExtResource("11_bk85x")]([SubResource("Resource_05xv4")])
+metadata/_custom_type_script = "uid://dfxda4exmr12v"
+
+[node name="ChasePlayer" type="Node" parent="BehaviorTree/RootSelector/BTSequence"]
+script = ExtResource("10_rj4us")
+_target_key = SubResource("Resource_7s355")
+_turn_speed = 4.0
+_move_speed = 200.0
+
+[node name="BTRandomSelector" type="Node" parent="BehaviorTree/RootSelector"]
+script = ExtResource("14_iu18o")
+metadata/_custom_type_script = "uid://dfxda4exmr12v"
+
+[node name="Patrol" type="Node" parent="BehaviorTree/RootSelector/BTRandomSelector"]
+editor_description = "The service is set not to tick when running. This means that it will only be ticked when the task is not running, so we can do things like picking a patrol point, waiting for the agent to reach it  (or fail for whathever reason) and then pick another patrol point. Otherwise, we would pick a new point  every tick and the agent would move randomly."
+script = ExtResource("10_rj4us")
+_target_key = SubResource("Resource_rj4us")
+_services = Array[ExtResource("11_rj4us")]([SubResource("Resource_uo51d")])
+_tick_services_when_running = false
+
+[node name="LookAtRandom" type="Node" parent="BehaviorTree/RootSelector/BTRandomSelector"]
+editor_description = "The service is set not to tick when running. This means that it will only be ticked when the task is not running, so we can do things like picking a direction, waiting for the agent to finish rotating (or failing for whathever reason) and then pick another direction. Otherwise, we would pick a new direction every tick and the agent would jitter."
+script = ExtResource("16_sxsli")
+_min_angle = 0.1
+_target_key = SubResource("Resource_cprs5")
+_services = Array[ExtResource("11_rj4us")]([SubResource("Resource_1u1aq")])
+_tick_services_when_running = false
