@@ -1,3 +1,5 @@
+![BTLogo](https://github.com/user-attachments/assets/f1890550-000c-4289-99aa-1ede37d08746)
+
 # GodotBT: Behavior Tree Framework for Godot 4.x
 
 A flexible, extensible behavior tree framework for Godot 4.x that makes it easy to create complex AI behaviors for your games.
